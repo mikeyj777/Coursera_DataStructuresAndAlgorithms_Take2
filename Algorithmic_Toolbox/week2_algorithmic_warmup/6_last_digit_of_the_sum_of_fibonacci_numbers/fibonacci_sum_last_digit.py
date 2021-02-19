@@ -27,7 +27,7 @@ def fib_sum_last_dig(n):
     fib_dict[0] = 0
     fib_dict[1] = 1
 
-    ans = 1
+    ans = 0
 
     for i in range(0,n+1):
         if i != 1:
