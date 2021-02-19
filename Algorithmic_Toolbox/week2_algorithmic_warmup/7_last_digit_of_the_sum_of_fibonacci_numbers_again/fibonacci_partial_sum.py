@@ -45,7 +45,10 @@ def fib_partial_sum_last_dig(m, n):
 if __name__ == '__main__':
     # input_n = int(input())
     f_low, f_high = [int(x) for x in input().split()]
-    if f_high < 2:
-        print(f_high)
+    if f_high <= 2:
+        if f_high < 2:
+            print(f_high)
+        else:
+            print(2)
     else:
         print(fib_partial_sum_last_dig(f_low, f_high))

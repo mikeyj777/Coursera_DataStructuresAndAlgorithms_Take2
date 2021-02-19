@@ -8,7 +8,7 @@ def eulerGcd(a, b):
     return eulerGcd(b, a_prime)
 
 def lcm(a, b):
-    return abs(a*b) / eulerGcd(a, b)
+    return int(abs(a*b) / eulerGcd(a, b))
 
 def lcm_naive(a, b):
     for l in range(1, a*b + 1):
