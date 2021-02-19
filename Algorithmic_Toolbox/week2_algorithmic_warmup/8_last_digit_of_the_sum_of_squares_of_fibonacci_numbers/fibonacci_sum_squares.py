@@ -41,6 +41,6 @@ if __name__ == '__main__':
     if input_n < 2:
         print(input_n)
     else:
-        for i in range(2,input_n+1):
-            print(fib_last_dig_sum_sq(i))
-        # print(fib_last_dig_sum_sq(input_n))
+        # for i in range(2,input_n+1):
+        #     print(fib_last_dig_sum_sq(i))
+        print(fib_last_dig_sum_sq(input_n))
