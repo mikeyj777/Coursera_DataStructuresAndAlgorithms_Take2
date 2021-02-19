@@ -47,5 +47,10 @@ if __name__ == '__main__':
     # else:
     #     for i in range(2,input_n+1):
     #         print(fib_sum_last_dig(i))
-    
-    print(fib_sum_last_dig(input_n))
+    if input_n <= 2:
+        if input_n < 2:
+            print(input_n)
+        else:
+            print(2)
+    else:
+        print(fib_sum_last_dig(input_n))
