@@ -40,4 +40,6 @@ def fib_sum_last_dig(n):
 
 if __name__ == '__main__':
     input_n = int(input())
+    # for i in range(input_n+1):
+    #     print(fib_sum_last_dig(i))
     print(fib_sum_last_dig(input_n))
