@@ -5,36 +5,25 @@ import sys
 def compute_min_refills(distance, tank, stops):
     # write your code here
 
+    stops.sort
     stops.append(distance)
-    stops.sort()
+
+    n = len(stops)-2
+
+    numRefills = 0
+    currRefill = 0
+    while currRefill <= n:
+        lastRefill = currRefill
+        while currRefill <= n and (stops[currRefill+1] - stops[lastRefill] <= tank):
+                currRefill += 1
     
-    currdist = 0
-    
-    totstops = 0
-    
-    i = 0
-    while i < len(stops):
-        while i < len(stops) and (stops[i] - currdist) <= tank and stops[i] <= distance:
-            i += 1
-        if i >= len(stops):
-            break
-        if stops[i] - stops[i-1] > tank:
-            return -1
-        currstop = stops[i-1]
-        if (currstop - currdist) <= tank:
-            if currstop == distance:
-                return totstops
-            totstops += 1
-            currdist = currstop
-            if currdist >= distance:
-                break
-        else:
+        if currRefill == lastRefill:
             return -1
         
-    if totstops == 0:
-        return -1
+        if currRefill <= n:
+            numRefills += 1
 
-    return totstops
+    return numRefills
 
 if __name__ == '__main__':
     d, m, _, *stops = map(int, sys.stdin.read().split())
