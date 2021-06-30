@@ -8,8 +8,8 @@ def compute_min_refills(distance, tank, stops):
     stops.append(distance)
     if 0 not in stops:
         stops.append(0)
-    stops.sort
-    
+    stops.sort()
+
     n = len(stops)
 
     currPosn = 0
@@ -18,9 +18,10 @@ def compute_min_refills(distance, tank, stops):
     while currPosn < n-1:
         if stops[currPosn+1] - stops[currPosn] > tank:
             return -1
-        if stops[currPosn + 1] - stops[startingPosn] >= tank:
-            startingPosn = currPosn + 1
+        if stops[currPosn + 1] - stops[startingPosn] > tank:
+            startingPosn = currPosn
             numFills += 1
+            continue
         currPosn += 1
     
     return numFills
