@@ -4,10 +4,12 @@ import sys
 
 def compute_min_refills(distance, tank, stops):
     # write your code here
+    if distance not in stops:
+        stops.append(distance)
 
-    stops.append(distance)
     if 0 not in stops:
         stops.append(0)
+    
     stops.sort()
 
     n = len(stops)
@@ -25,9 +27,6 @@ def compute_min_refills(distance, tank, stops):
         currPosn += 1
     
     return numFills
-
-
-    
 
 if __name__ == '__main__':
     d, m, _, *stops = map(int, sys.stdin.read().split())
