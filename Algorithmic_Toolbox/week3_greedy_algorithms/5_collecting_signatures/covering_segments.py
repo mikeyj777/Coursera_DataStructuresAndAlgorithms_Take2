@@ -4,31 +4,26 @@ from collections import namedtuple
 
 Segment = namedtuple('Segment', 'start end')
 
-
+visits = []
 
 def optimal_points(segments):
-    segs_outer = []
-    
+    segs = []
     #write your code here
+
     for i in segments:
-        # points.append(s.start)
-        # points.append(s.end)
-        segs_inner = []
-        for j in range(i.start, i.end+1):
-            segs_inner.append(j)
-        segs_outer.append(segs_inner)
+        seg = []
+        for j in range(i.start,i.end+1):
+            seg.append(j)
+        segs.append(seg)
     
-    for i in range(len(segs_outer)):
-        for j in range(len(segs_outer)):
-            if i != j:
-                for ii in segs_outer[i]:
-                    for jj in segs_outer[j]:
-                        if ii == jj:
-                            
-        
-        
-
-
+    for i in range(len(segs)):
+        for j in range(i,len(segs)):
+            intersxn = set(segs[i]).intersection(segs[j])
+            #recursively check if segs[j] and 'intersxn' have intersecting members.
+            #if so check next j
+            #if not, store as a time when will need to visit.
+                
+    
     return None
 
 if __name__ == '__main__':
