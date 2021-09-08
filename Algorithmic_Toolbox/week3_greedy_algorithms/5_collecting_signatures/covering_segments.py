@@ -21,13 +21,18 @@ def optimal_points(segments):
         segs.append(seg)
     
     winners = []
-    for i in range(len(segs)):
-        intersxn = set(segs[i]).intersection(segs[i+1])
-        winner = max(segs[i])    
+    i = 0
+    while i < len(segs):
+        intersxn = []
+        if i < len(segs)-1:
+            intersxn = set(segs[i]).intersection(segs[i+1])
+        winner = intersxn
+        j = i
         while len(intersxn) > 0:
             winner = intersxn
-            for j in range(i+2,len(segs)):
-                intersxn = set(intersxn).intersection(segs(j))
+            j += 1
+            intersxn = set(intersxn).intersection(segs(j))
+        i = max(i+1, j)
         winners.append(max(winner))
 
     return winners
