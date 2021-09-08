@@ -6,6 +6,10 @@ Segment = namedtuple('Segment', 'start end')
 
 visits = []
 
+# def check_intersections(seg1, seg2):
+#     intersxn = set(seg1).intersection(seg2)
+#     if len(intersxn) > 0:
+
 def optimal_points(segments):
     segs = []
     #write your code here
@@ -16,15 +20,17 @@ def optimal_points(segments):
             seg.append(j)
         segs.append(seg)
     
+    winners = []
     for i in range(len(segs)):
-        for j in range(i,len(segs)):
-            intersxn = set(segs[i]).intersection(segs[j])
-            #recursively check if segs[j] and 'intersxn' have intersecting members.
-            #if so check next j
-            #if not, store as a time when will need to visit.
-                
-    
-    return None
+        intersxn = set(segs[i]).intersection(segs[i+1])
+        winner = max(segs[i])    
+        while len(intersxn) > 0:
+            winner = intersxn
+            for j in range(i+2,len(segs)):
+                intersxn = set(intersxn).intersection(segs(j))
+        winners.append(max(winner))
+
+    return winners
 
 if __name__ == '__main__':
     input = sys.stdin.read()
