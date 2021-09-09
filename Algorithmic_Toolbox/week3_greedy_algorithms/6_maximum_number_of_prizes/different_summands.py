@@ -12,7 +12,7 @@ def optimal_summands(n):
         return list(summands.keys())
 
     for i in range(1,n):
-        if (ans - i)  not in summands.keys():
+        if (ans - i) not in summands.keys() and i < ans and ans - i != i:
             ans -= i
             summands[i] = ''
         else:
