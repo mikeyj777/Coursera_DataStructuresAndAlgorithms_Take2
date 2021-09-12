@@ -3,22 +3,19 @@
 import sys
 
 def isgreaterthanorequal(a, b):
-    return int(str(a) + str(b)) > int(str(b) + str(a))
+    return int(str(a) + str(b)) >= int(str(b) + str(a))
 
 def largest_number(a):
-    # LargestNumber(Digits):
-    # answer ← empty string
+
+    a.sort(reverse = True)
 
     ans = ''
 
-    for i in range(1, len(a)):
-        j = i - 1
-        if isgreaterthanorequal(a[j], a[i]):
-            ans += str(a[j])
+    for i in range(len(a)):
+        if isgreaterthanorequal(ans, a[i]):
             ans += str(a[i])
         else:
-            ans += str(a[i])
-            ans += str(a[j])
+            ans = str(a[i]) + ans
     
     return ans
 
