@@ -2,34 +2,27 @@
 
 import sys
 
+def isgreaterthanorequal(a, b):
+    return int(str(a) + str(b)) > int(str(b) + str(a))
+
 def largest_number(a):
-    #write your code here
-    # res = []
-    # for x in a:
-    #     list_x = list(str(x))
-    #     for i in list_x:
-    #         res.append(i)
+    # LargestNumber(Digits):
+    # answer ← empty string
+
+    ans = ''
+
+    for i in range(1, len(a)):
+        j = i - 1
+        if isgreaterthanorequal(a[j], a[i]):
+            ans += str(a[j])
+            ans += str(a[i])
+        else:
+            ans += str(a[i])
+            ans += str(a[j])
     
-    # res.sort(reverse=True)
+    return ans
 
-    # ans = 0
-
-    # currpow = 0
-
-    # for i in range(len(res)-1,-1,-1):
-    #     ans += int(res[i])*10**currpow
-    #     currpow += 1
     
-    # return ans
-
-
-    res = ""
-
-    a.sort(reverse=True)
-
-    for x in a:
-        res += x
-    return res
 
 if __name__ == '__main__':
     input = sys.stdin.read()
