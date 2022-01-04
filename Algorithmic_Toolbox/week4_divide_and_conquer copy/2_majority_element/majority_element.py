@@ -16,7 +16,7 @@ def get_majority_element(a, left, right):
     for i in range(len(a)):
         if a[i] in elems.keys():
             elems[a[i]] += 1
-            if elems[a[i]] >= n / 2:
+            if elems[a[i]] > n / 2:
                 return 1
         else:
             elems[a[i]] = 1
