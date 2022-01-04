@@ -4,7 +4,7 @@ import sys
 def binary_search(a, x):
     left, right = 0, len(a)
     while True:
-        mid = (left + right) // 2
+        mid = int(left + (right-left)/2)
         if right - left < 1:
             return -1
         if a[left] > x:
