@@ -18,18 +18,20 @@ def partition3(l, r):
     lessers = []
     equals = [x]
     greaters = []
+    m1 = l
+    m2 = r
     for i in range(l+1, r+1):
         if a[i] < x:
             lessers.append(a[i])
+            m1 = len(lessers) - 1
+            a[i], a[m1] = a[m1], a[i]
         if a[i] == x:
             equals.append(x)
+            a[i], a[m1+1] = a[m1+1], a[i]
         if a[i] > x:
             greaters.append(a[i])
-    
-    m1 = len(lessers)
-    m2 = m1 + len(equals) - 1
-
-    a = lessers + equals + greaters
+            m2 = r-len(greaters)
+            a[i], a[m2] = a[m2], a[i]
 
     return (m1, m2)
 
