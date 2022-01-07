@@ -13,6 +13,8 @@ def partition2(a, l, r):
     return j
 
 def partition3(a, l, r):
+    # soln from https://stackoverflow.com/a/36972806/3825495
+    
     x, j, t = a[l], l, r
     i = j
 
