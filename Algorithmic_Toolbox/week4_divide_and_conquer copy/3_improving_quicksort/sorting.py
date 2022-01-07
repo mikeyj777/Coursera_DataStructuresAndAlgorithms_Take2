@@ -12,45 +12,36 @@ def partition2(a, l, r):
     a[l], a[j] = a[j], a[l]
     return j
 
-def partition3(l, r):
-    global a
-    x = a[l]
-    lessers = []
-    equals = [x]
-    greaters = []
-    m1 = l
-    m2 = r
-    for i in range(l+1, r+1):
+def partition3(a, l, r):
+    x, j, t = a[l], l, r
+    i = j
+
+    while i <= t :
         if a[i] < x:
-            lessers.append(a[i])
-            m1 = len(lessers) - 1
-            a[i], a[m1] = a[m1], a[i]
-        if a[i] == x:
-            equals.append(x)
-            a[i], a[m1+1] = a[m1+1], a[i]
-        if a[i] > x:
-            greaters.append(a[i])
-            m2 = r-len(greaters)
-            a[i], a[m2] = a[m2], a[i]
+            a[j], a[i] = a[i], a[j]
+            j += 1
 
-    return (m1, m2)
+        elif a[i] > x:
+            a[t], a[i] = a[i], a[t]
+            t -= 1
+            i -= 1 # remain in the same i in this case
+        i += 1
+    return j, t
 
-def randomized_quick_sort(l, r):
+def randomized_quick_sort(a, l, r):
     if l >= r:
         return
     k = random.randint(l, r)
     a[l], a[k] = a[k], a[l]
     #use partition3
-    (m1, m2) = partition3(l, r)
-    randomized_quick_sort(l, m1 - 1)
-    randomized_quick_sort(m2 + 1, r)
+    m1, m2 = partition3(a, l, r)
+    randomized_quick_sort(a, l, m1 - 1)
+    randomized_quick_sort(a, m2 + 1, r)
 
 
 if __name__ == '__main__':
-    # input = sys.stdin.read()
-    # n, *a = list(map(int, input.split()))
-    a = [2, 1, 3, 2]
-    n = len(a)
-    randomized_quick_sort(0, n - 1)
+    input = sys.stdin.read()
+    n, *a = list(map(int, input.split()))
+    randomized_quick_sort(a, 0, n - 1)
     for x in a:
         print(x, end=' ')
