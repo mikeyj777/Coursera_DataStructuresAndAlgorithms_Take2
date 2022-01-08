@@ -14,9 +14,9 @@ def get_number_of_inversions(a, b, left, right):
     return number_of_inversions
 
 if __name__ == '__main__':
-    # input = sys.stdin.read()
-    # n, *a = list(map(int, input.split()))
-    a = [0, 1, 0]
-    n = len(a)
+    input = sys.stdin.read()
+    n, *a = list(map(int, input.split()))
+    # a = [0, 1, 0]
+    # n = len(a)
     b = n * [0]
     print(get_number_of_inversions(a, b, 0, n - 1))
