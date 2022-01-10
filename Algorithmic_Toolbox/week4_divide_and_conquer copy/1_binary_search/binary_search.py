@@ -6,8 +6,10 @@ def binary_search(a, x):
     while True:
         mid = int(left + (right-left)/2)
         if right - left <= 1:
-            if a[mid] == x:
-                return mid
+            if a[left] == x:
+                return left
+            elif a[right] == x:
+                return right
             else:
                 return -1
         if a[left] > x:
@@ -29,9 +31,9 @@ def linear_search(a, x):
     return -1
 
 if __name__ == '__main__':
-    input = sys.stdin.read()
-    data = list(map(int, input.split()))
-    # data = [5, 1, 5, 8, 12, 13, 5, 8, 1, 23, 1, 11]
+    # input = sys.stdin.read()
+    # data = list(map(int, input.split()))
+    data = [5, 1, 2, 3, 4, 5, 5, 1, 2, 3, 4, 5]
     n = data[0]
     m = data[n + 1]
     a = data[1 : n + 1]
