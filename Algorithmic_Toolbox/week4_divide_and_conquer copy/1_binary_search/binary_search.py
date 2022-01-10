@@ -31,9 +31,9 @@ def linear_search(a, x):
     return -1
 
 if __name__ == '__main__':
-    # input = sys.stdin.read()
-    # data = list(map(int, input.split()))
-    data = [5, 1, 2, 3, 4, 5, 5, 1, 2, 3, 4, 5]
+    input = sys.stdin.read()
+    data = list(map(int, input.split()))
+    # data = [5, 1, 2, 3, 4, 5, 5, 1, 2, 3, 4, 5]
     n = data[0]
     m = data[n + 1]
     a = data[1 : n + 1]
