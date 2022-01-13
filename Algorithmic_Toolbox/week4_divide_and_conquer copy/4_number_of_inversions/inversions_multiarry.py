@@ -45,44 +45,44 @@ def my_sort(a, left, right):
 
 #     return a, num_inversions + more_invs
 
-def mergeSort(arr, b, left, right):
-    if right - left > 1:
+def mergeSort(arr):
+    if len(arr) > 1:
   
          # Finding the mid of the array
-        mid = (right + left)//2
+        mid = len(arr)//2
+  
+        # Dividing the array elements
+        L = arr[:mid]
+  
+        # into 2 halves
+        R = arr[mid:]
   
         # Sorting the first half
-        mergeSort(arr, b, left, mid - 1)
+        mergeSort(L)
   
         # Sorting the second half
-        mergeSort(arr, b, mid, right)
+        mergeSort(R)
   
-        i = k = 0
+        i = j = k = 0
   
-        j = mid
-        
         # Copy data to temp arrays L[] and R[]
-        while i < mid and j < len(arr):
-            if arr[i] < arr[j]:
-                b[k] = arr[i]
+        while i < len(L) and j < len(R):
+            if L[i] < R[j]:
+                arr[k] = L[i]
                 i += 1
             else:
-                b[k] = arr[j]
+                arr[k] = R[j]
                 j += 1
             k += 1
   
         # Checking if any element was left
-        while i < mid:
-            if k > len(b):
-                break
-            b[k] = arr[i]
+        while i < len(L):
+            arr[k] = L[i]
             i += 1
             k += 1
   
-        while j < len(arr):
-            if k > len(b):
-                break
-            b[k] = arr[j]
+        while j < len(R):
+            arr[k] = R[j]
             j += 1
             k += 1
 
@@ -103,9 +103,9 @@ if __name__ == '__main__':
     b = [0] * len(a)
     # print(a)
     t0 = dt.now()
-    mergeSort(a, b, 0, len(a) - 1)
+    mergeSort(a)
 
     # print(f'there were {num_inversions} inversion(s).  The sorted array is {a}.')
-    print(a0, b, b == sorted(a0), num_inversions, dt.now() - t0)
+    print(a0, a, a == sorted(a0), num_inversions, dt.now() - t0)
     
     pass
