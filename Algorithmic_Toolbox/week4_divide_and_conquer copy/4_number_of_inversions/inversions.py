@@ -5,107 +5,95 @@ from datetime import datetime as dt
 import copy
 
 num_inversions = 0
+a0 = []
+#iterative merge sort:  https://www.geeksforgeeks.org/iterative-merge-sort/
 
-def my_sort(a, left, right):
-    # bubble sort from https://www.geeksforgeeks.org/bubble-sort/
-    num_inversions = 0
-    if len(a) < 2:
-        return a, 0
-    
-    isSorted = False
-    lastUnsorted = right
-    while not isSorted:
-        isSorted = True
-        for i in range(left, lastUnsorted):
-            if a[i] > a[i+1]:
-                num_inversions += 1
-                a[i], a[i+1] = a[i+1], a[i]
-                # print(a)
-                isSorted = False
-        lastUnsorted -= 1
 
-    return a, num_inversions
-
-# def merge_sort(a, left, right):
-#     num_inversions = 0
-#     if right - left < 1:
-#         return a, 0
-#     if right - left == 1:
-#         return my_sort(a, left, right)
-    
-#     ave = (left + right) // 2
-
-#     a, left_invs = merge_sort(a, left, ave - 1)
-    
-#     a, right_invs = merge_sort(a, ave, right)
-
-#     num_inversions += left_invs + right_invs
-
-#     a, more_invs = my_sort(a, left, right)
-
-#     return a, num_inversions + more_invs
-
-def mergeSort(arr, b, left, right):
-    if right - left > 1:
-  
-         # Finding the mid of the array
-        mid = (right + left)//2
-  
-        # Sorting the first half
-        mergeSort(arr, b, left, mid - 1)
-  
-        # Sorting the second half
-        mergeSort(arr, b, mid, right)
-  
-        i = k = 0
-  
-        j = mid
-        
-        # Copy data to temp arrays L[] and R[]
-        while i < mid and j < len(arr):
-            if arr[i] < arr[j]:
-                b[k] = arr[i]
-                i += 1
-            else:
-                b[k] = arr[j]
-                j += 1
-            k += 1
-  
-        # Checking if any element was left
-        while i < mid:
-            if k > len(b):
-                break
-            b[k] = arr[i]
-            i += 1
-            k += 1
-  
-        while j < len(arr):
-            if k > len(b):
-                break
-            b[k] = arr[j]
+# perform bottom up merge
+def mergeSort(a):
+    # start with least partition size of 2^0 = 1
+    width = 1   
+    n = len(a)                                         
+    # subarray size grows by powers of 2
+    # since growth of loop condition is exponential,
+    # time consumed is logarithmic (log2n)
+    while (width < n):
+        # always start from leftmost
+        l=0
+        while (l < n):
+            r = min(l+(width*2-1), n-1)
+            m = (l+r)//2
+            # final merge should consider
+            # unmerged sublist if input arr
+            # size is not power of 2
+            if (width>n//2):       
+                m = r-(n%width)  
+            merge(a, l, m, r)
+            l += width*2
+        # Increasing sub array size by powers of 2
+        width *= 2
+    return a
+   
+# Merge Function
+def merge(a, l, m, r):
+    global a0, num_inversions
+    n1 = m - l + 1
+    n2 = r - m
+    L = [0] * n1
+    R = [0] * n2
+    for i in range(0, n1):
+        L[i] = a[l + i]
+    for i in range(0, n2):
+        R[i] = a[m + i + 1]
+ 
+    i, j, k = 0, 0, l
+    while i < n1 and j < n2:
+        if L[i] > R[j]:
+            a[k] = R[j]
+            num_inversions += 1
             j += 1
-            k += 1
+        else:
+            a[k] = L[i]
+            i += 1
+        # if a0[k] > a[k]:
+        #     num_inversions += 1
+        k += 1
+ 
+    while i < n1:
+        a[k] = L[i]
+        # if a0[k] > a[k]:
+        #     num_inversions += 1
+        i += 1
+        k += 1
+ 
+    while j < n2:
+        a[k] = R[j]
+        # if a0[k] > a[k]:
+        #     num_inversions += 1
+        j += 1
+        k += 1
 
 
 
 if __name__ == '__main__':
     # input = sys.stdin.read()
     # n, *a = list(map(int, input.split()))
-    # a = [2, 3, 9, 2, 9]
-    a = []
-    a = [77, 65, 52]
+    a = [2, 3, 9, 2, 9]
+    # a = []
+    # a = [77, 65, 52]
     
     # for i in range(int(6)):
     #     a.append(randint(1, 100))
     
     a0 = copy.deepcopy(a)
     
-    b = [0] * len(a)
+    # b = [0] * len(a)
     # print(a)
+
     t0 = dt.now()
-    mergeSort(a, b, 0, len(a) - 1)
+    mergeSort(a)
 
     # print(f'there were {num_inversions} inversion(s).  The sorted array is {a}.')
-    print(a0, b, b == sorted(a0), num_inversions, dt.now() - t0)
+    print(a0, a, a == sorted(a0), num_inversions, dt.now() - t0)
     
     pass
