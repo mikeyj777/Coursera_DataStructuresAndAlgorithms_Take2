@@ -4,6 +4,7 @@ import numpy as np
 import math
 
 def pts_dist(p0, p1):
+
     x0 = p0[0]
     y0 = p0[1]
     x1 = p1[0]
@@ -14,6 +15,9 @@ def pts_dist(p0, p1):
     return dist
 
 def get_min_dist(S):
+    
+    if len(S) == 1:
+        return 0
     
     dists = []
     for row_1 in S:
@@ -29,6 +33,12 @@ def get_min_dist(S):
 
 def minimum_distance(xy):
     
+    if len(xy) == 1:
+        return 0
+
+    if len(xy) == 2:
+        return pts_dist(xy[0], xy[1])
+
     mid_x = (max(xy[:,0]) + min(xy[:,0])) / 2
 
     S1 = xy[xy[:,0] < mid_x]
@@ -48,14 +58,17 @@ def minimum_distance(xy):
     return the_min
 
 if __name__ == '__main__':
-    input = sys.stdin.read()
-    data = list(map(int, input.split()))
+    # input = sys.stdin.read()
+    # data = list(map(int, input.split()))
     # n = data[0]
     # x = data[1::2]
     # y = data[2::2]
-    n = 2
-    x = [0,0]
-    y = [3,4]
+    
+    xy = np.asarray([
+                [7, 7],
+                [1, 100],
+                [4, 8],
+                [7, 7]
+                ])
 
-    xy = np.asarray([x, y])
     print("{0:.9f}".format(minimum_distance(xy)))
