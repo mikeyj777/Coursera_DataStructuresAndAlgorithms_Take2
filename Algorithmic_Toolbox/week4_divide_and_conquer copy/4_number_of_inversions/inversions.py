@@ -76,24 +76,28 @@ def merge(a, l, m, r):
 
 
 if __name__ == '__main__':
-    # input = sys.stdin.read()
-    # n, *a = list(map(int, input.split()))
-    a = [2, 3, 9, 2, 9]
+    input = sys.stdin.read()
+    n, *a = list(map(int, input.split()))
+    # a = [2, 3, 9, 2, 9]
     # a = []
     # a = [77, 65, 52]
     
     # for i in range(int(6)):
     #     a.append(randint(1, 100))
     
-    a0 = copy.deepcopy(a)
+    # a0 = copy.deepcopy(a)
     
     # b = [0] * len(a)
     # print(a)
 
-    t0 = dt.now()
+    # t0 = dt.now()
     mergeSort(a)
 
     # print(f'there were {num_inversions} inversion(s).  The sorted array is {a}.')
-    print(a0, a, a == sorted(a0), num_inversions, dt.now() - t0)
+    # print(a0, a, a == sorted(a0), num_inversions, dt.now() - t0)
     
-    pass
+    # pass
+
+    print(num_inversions)
+
+    

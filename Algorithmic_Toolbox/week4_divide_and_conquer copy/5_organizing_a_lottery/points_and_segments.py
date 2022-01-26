@@ -1,10 +1,19 @@
 # Uses python3
 import sys
 
+cnt = 0
+
 def fast_count_segments(starts, ends, points):
-    cnt = [0] * len(points)
-    #write your code here
-    return cnt
+    global cnt
+    
+    if len(points) > 1:
+        mid = len(points) // 2
+        L_points = points[:mid]
+        R_points = points[mid:]
+
+    
+        
+
 
 def naive_count_segments(starts, ends, points):
     cnt = [0] * len(points)
