@@ -3,6 +3,7 @@ import sys
 import numpy as np
 import math
 
+
 def pts_dist(p0, p1):
 
     x0 = p0[0]
@@ -21,8 +22,7 @@ def get_min_dist(S):
     
     dists = []
     for i in range(len(S)):
-        for j in range(len(S)):
-            if i != j:
+        for j in range(i+1, len(S)):
                 dist = pts_dist(S[i], S[j])
                 if dist == 0:
                     return 0
@@ -56,7 +56,7 @@ def minimum_distance(xy):
     S1 = S1[S1[:,0] < mid_x + min_dist]
     S2 = S2[S2[:,0] < mid_x + min_dist]
 
-    P = S1 + S2
+    P = np.vstack((S1, S2))
     P = np.asarray(P)
     P = P[P[:,1].argsort()]
     P = P[:7]
@@ -75,21 +75,10 @@ if __name__ == '__main__':
     xy = np.asarray([x,y])
     xy = xy.T
 
-    # xy = np.asarray([  
-
-    #                     [4, 4], 
-    #                     [-2, -2], 
-    #                     [-3, -4], 
-    #                     [-1, 3], 
-    #                     [2, 3], 
-    #                     [-4, 0], 
-    #                     [1, 1], 
-    #                     [-1, -1], 
-    #                     [3, 1], 
-    #                     [-4, 2], 
-    #                     [-2, 4]
-
-    #                 ])
+    # xy = np.asarray([   [0, 0],
+    #                     [5, 6],
+    #                     [3, 4],
+    #                     [7, 2]])
 
     # print(xy)
 
