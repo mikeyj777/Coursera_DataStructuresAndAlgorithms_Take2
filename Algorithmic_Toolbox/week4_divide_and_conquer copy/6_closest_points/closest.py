@@ -15,18 +15,22 @@ def pts_dist(p0, p1):
 
     return dist
 
-def get_min_dist(S):
-    
+def get_min_dist(S, stop_after_x_points = 0):
+
     if len(S) == 1:
         return 1e10
     
     dists = []
     for i in range(len(S)):
-        for j in range(i+1, len(S)):
-                dist = pts_dist(S[i], S[j])
-                if dist == 0:
-                    return 0
-                dists.append(dist)
+        j_upper = len(S)
+        if stop_after_x_points > 0:
+            j_upper = min(j_upper, i + stop_after_x_points + 1)
+        
+        for j in range(i+1, j_upper):
+            dist = pts_dist(S[i], S[j])
+            if dist == 0:
+                return 0
+            dists.append(dist)
     
     min_dist = min(dists)
 
@@ -58,28 +62,28 @@ def minimum_distance(xy):
 
     P = np.vstack((S1, S2))
     P = np.asarray(P)
-    P = P[P[:,1].argsort()]
-    P = P[:7]
-    min_dist_P = get_min_dist(P)
+    # P = P[P[:,1].argsort()]
+    # P = P[:7]
+    min_dist_P = get_min_dist(P, 7)
     the_min = min(min_dist, min_dist_P)
     
     return the_min
 
 if __name__ == '__main__':
-    input = sys.stdin.read()
-    data = list(map(int, input.split()))
-    n = data[0]
-    x = data[1::2]
-    y = data[2::2]
+    # input = sys.stdin.read()
+    # data = list(map(int, input.split()))
+    # n = data[0]
+    # x = data[1::2]
+    # y = data[2::2]
     
-    xy = np.asarray([x,y])
-    xy = xy.T
+    # xy = np.asarray([x,y])
+    # xy = xy.T
 
-    # xy = np.asarray([   [0, 0],
-    #                     [5, 6],
-    #                     [3, 4],
-    #                     [7, 2]])
+    xy = np.asarray([   [0, 0],
+                        [5, 6],
+                        [3, 4],
+                        [7, 2]])
 
-    # print(xy)
+    print(xy)
 
     print("{0:.9f}".format(minimum_distance(xy)))
