@@ -70,20 +70,20 @@ def minimum_distance(xy):
     return the_min
 
 if __name__ == '__main__':
-    # input = sys.stdin.read()
-    # data = list(map(int, input.split()))
-    # n = data[0]
-    # x = data[1::2]
-    # y = data[2::2]
+    input = sys.stdin.read()
+    data = list(map(int, input.split()))
+    n = data[0]
+    x = data[1::2]
+    y = data[2::2]
     
-    # xy = np.asarray([x,y])
-    # xy = xy.T
+    xy = np.asarray([x,y])
+    xy = xy.T
 
-    xy = np.asarray([   [0, 0],
-                        [5, 6],
-                        [3, 4],
-                        [7, 2]])
+    # xy = np.asarray([   [0, 0],
+    #                     [5, 6],
+    #                     [3, 4],
+    #                     [7, 2]])
 
-    print(xy)
+    # print(xy)
 
     print("{0:.9f}".format(minimum_distance(xy)))
