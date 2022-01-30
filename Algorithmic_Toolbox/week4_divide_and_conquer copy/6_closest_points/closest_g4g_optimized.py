@@ -1,9 +1,10 @@
 import math
+import copy
 
 class Point:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+    def __init__(self, xy):
+        self.x = xy[0]
+        self.y = xy[1]
 
 def compare_x(p1, p2):
 
@@ -52,18 +53,47 @@ def closest_util(px, py, n):
     if n <= 3:
         return brute_force(px, n)
 
-    mid = n // 2
-    midpoint = px[mid]
+    mid_pt = n // 2
+    midpoint = px[mid_pt]
 
     li = 0
     ri = 0
 
+    pyl = []
+    pyr = []
+
     for i in range(n):
-        if (py[i].x < midpoint.x or (py[i].x == midpoint.x and py[i].y < midpoint.y)) and li < mid:
-            li++
-    {
-      if ((Py[i].x < midPoint.x || (Py[i].x == midPoint.x && Py[i].y < midPoint.y)) && li<mid)
-         Pyl[li++] = Py[i];
-      else
-         Pyr[ri++] = Py[i];
-    }
+        if (py[i].x < midpoint.x or (py[i].x == midpoint.x and py[i].y < midpoint.y)) and li < mid_pt:
+            pyl.append(py[i])
+            li += 1
+        else:
+            pyr.append(py[i])
+            ri += 1
+
+    dl = closest_util(px, pyl, mid_pt)
+    dr = closest_util([x + mid_pt for x in px], pyr, n - mid_pt)
+
+    d = min(dl, dr)
+
+    strip = []
+
+    for i in range(n):
+        if abs(py[i].x - midpoint.x) < d:
+           strip.append(py[i])
+    
+    return strip_closest(strip, len(strip) - 1, d)
+
+def closest(p, n):
+    px = copy.deepcopy(p)
+    py = copy.deepcopy(p)
+
+    px.sort(key=lambda var: var.x)
+    py.sort(key=lambda var: var.y)
+
+    return closest_util(px, py, n)
+
+inarr = [[2, 3], [12, 30], [40, 50], [5, 1], [12, 10], [3, 4]]
+
+p = []
+
+p.append([Point(elem) for elem in inarr])
