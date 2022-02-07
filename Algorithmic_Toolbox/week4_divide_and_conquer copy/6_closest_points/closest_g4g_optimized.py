@@ -97,3 +97,5 @@ inarr = [[2, 3], [12, 30], [40, 50], [5, 1], [12, 10], [3, 4]]
 p = []
 
 p.append([Point(elem) for elem in inarr])
+
+closer = closest(p, len(p))
