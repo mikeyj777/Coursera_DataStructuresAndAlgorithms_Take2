@@ -4,17 +4,17 @@ import copy
 import numpy as np
 
 winners = []
-def calculator(target, n=1, calc_chain = []):
+def calculator(target, n=1, calc_chain = [1]):
     global winners
     if n == target:
         winners.append(calc_chain)
 
     if n < target:
-        calc_chain.append(n)
         inputs = [n + 1, n * 2, n * 3]
-        if min(inputs) < 5:
+        if min(inputs) <= target:
             for inp in inputs:
-                if inp < target:
+                if inp <= target:
+                    calc_chain.append(inp)
                     calculator(target, inp, copy.deepcopy(calc_chain))
 
 def calc_handler(n):
