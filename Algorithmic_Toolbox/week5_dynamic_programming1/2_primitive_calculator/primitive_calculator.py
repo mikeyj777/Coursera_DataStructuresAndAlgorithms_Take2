@@ -1,21 +1,41 @@
 # Uses python3
 import sys
+import copy
+import numpy as np
 
-def optimal_sequence(n):
-    sequence = []
-    while n >= 1:
-        sequence.append(n)
-        if n % 3 == 0:
-            n = n // 3
-        elif n % 2 == 0:
-            n = n // 2
-        else:
-            n = n - 1
-    return reversed(sequence)
+winners = []
+def calculator(target, n=1, calc_chain = []):
+    global winners
+    if n == target:
+        winners.append(calc_chain)
 
-input = sys.stdin.read()
-n = int(input)
-sequence = list(optimal_sequence(n))
-print(len(sequence) - 1)
-for x in sequence:
+    if n < target:
+        calc_chain.append(n)
+        inputs = [n + 1, n * 2, n * 3]
+        if min(inputs) < 5:
+            for inp in inputs:
+                if inp < target:
+                    calculator(target, inp, copy.deepcopy(calc_chain))
+
+def calc_handler(n):
+    calculator(n)
+    shortest_chain = np.inf
+    shortest_idx = -1
+    for i in range(len(winners)):
+        if len(winners[i]) < shortest_chain:
+            shortest_chain = len(winners[i])
+            shortest_idx = i
+    return winners[shortest_idx]
+
+
+
+
+# input = sys.stdin.read()
+# n = int(input)
+
+n = 5
+
+output = calc_handler(n)
+print(len(output) - 1)
+for x in output:
     print(x, end=' ')
