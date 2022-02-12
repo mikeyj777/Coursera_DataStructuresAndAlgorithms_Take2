@@ -17,8 +17,9 @@ def calculator(target, n=1, calc_chain = []):
                     solns[i] = [i] + calc_chain[i:]
             else:
                 solns[i] = [i] + calc_chain[i:]
+                
     if n < target:
-        inputs = [n + 1, n * 2, n * 3]
+        inputs = [n * 3, n * 2, n + 1]
         if min(inputs) <= target:
             for inp in inputs:
                 if inp <= target:
@@ -27,7 +28,13 @@ def calculator(target, n=1, calc_chain = []):
                             calc_chain.extend(solns[inp])
                             winners.append(calc_chain)
                     else:
-                        calculator(target, inp, copy.deepcopy(calc_chain))
+                        inp_val = inp
+                        if n*2 > target and inp_val == n+1:
+                            for i in range(n+1, target):
+                                calc_chain.append(i)
+                            inp_val = target
+                        calculator(target, inp_val, copy.deepcopy(calc_chain))
+                        
 
 def calc_handler(n):
     calculator(n)
@@ -45,7 +52,7 @@ def calc_handler(n):
 # input = sys.stdin.read()
 # n = int(input)
 
-n = 5
+n = 96234
 
 output = calc_handler(n)
 print(len(output) - 1)
