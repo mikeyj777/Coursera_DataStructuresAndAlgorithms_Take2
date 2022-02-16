@@ -26,10 +26,10 @@ def edit_distance(a, b):
             else:
                 D[i,j] = min(insertion, deletion, mismatch)
     
-    return D[n, m]
+    return int(D[n, m])
 
-a = "bread"
-b = "really"
+a = "editing"
+b = "distance"
 
 e_dist = edit_distance(a, b)
 
