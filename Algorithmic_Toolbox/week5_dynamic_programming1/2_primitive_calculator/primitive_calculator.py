@@ -46,9 +46,6 @@ def calc_handler(n):
             shortest_idx = i
     return winners[shortest_idx]
 
-
-
-
 # input = sys.stdin.read()
 # n = int(input)
 
