@@ -4,19 +4,22 @@ import numpy as np
 
 def optimal_weight(W, wts):
 
-    value = np.zeros((W+1))
+    n = len(wts)
+
+    value = np.zeros((W+1, n+1))
 
     #take the napsack without repetitions model and apply it here.
 
-    for w in range(1, W+1):
-        for i in range(len(wts)):
-            if wts[i] <= w:
-                val = value[w - wts[i]] + wts[i]
-                print(f'w: {w}.  i: {i}.  wts[i]: {wts[i]}.  value[w]: {value[w]}.  value[w - wts[i]]:{value[w - wts[i]]}.  val: {val}')
-                if val > value[w]:
-                    value[w] = val
+    for i in range(1, n + 1):
+        for w in range(1, W+1):
+            value[w, i] = value[w, i-1]
+            if wts[i-1] <= w:
+                val = value[w - wts[i-1], i - 1] + wts[i-1]
+                # print(f'w: {w}.  i: {i}.  wts[i]: {wts[i]}.  value[w, i]: {value[w, i]}.  value[w - wts[i], i-1]:{value[w - wts[i], i-1]}.  val: {val}')
+                if val > value[w, i]:
+                    value[w, i] = val
     
-    return int(value[W])
+    return int(value[W, n])
                 
 W = 20
 w = [5, 7, 12, 18]
