@@ -21,13 +21,13 @@ def optimal_weight(W, wts):
     
     return int(value[W, n])
                 
-W = 20
-w = [5, 7, 12, 18]
+# W = 20
+# w = [5, 7, 12, 18]
 
 # W = 3
 # w = [1,2]
 
 if __name__ == '__main__':
-    # input = sys.stdin.read()
-    # W, n, *w = list(map(int, input.split()))
+    input = sys.stdin.read()
+    W, n, *w = list(map(int, input.split()))
     print(optimal_weight(W, w))
