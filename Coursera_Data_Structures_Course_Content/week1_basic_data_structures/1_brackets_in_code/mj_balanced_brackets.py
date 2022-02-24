@@ -1,5 +1,5 @@
 import numpy as np
-import week1_basic_data_structures.class_examples.doubly_linked_list as LL
+import doubly_linked_list as LL
 
 class Stack(LL.Hash_Table_Doubly_Linked):
 
@@ -9,16 +9,12 @@ class Stack(LL.Hash_Table_Doubly_Linked):
     
     def top(self):
         a = self.top_front()
-        return a.key
+        return a
 
     def pop(self):
         a = self.top_front()
         self.pop_front()
-        return a.key
-    
-    def empty(self):
-
-        return self.empty()
+        return a
 
 
     def isBalanced(self, l):
@@ -31,14 +27,15 @@ class Stack(LL.Hash_Table_Doubly_Linked):
             else:
                 if self.empty():
                     return False
-                top = self.pop()
-                if (top == '[' and char != ']') or \
-                    (top == '(' and char != ')'):
-                    return False
+                if char in [')', ']']:
+                    top = self.pop()
+                    if (top == '[' and char != ']') or \
+                        (top == '(' and char != ')'):
+                        return False
         
         return self.empty()
 
-instr = '([(())])'
+instr = '(4 + [ 15* ( a chipmunk / ( 2**3 ) / 45 ) + 20] * 8)'
 
 stack = Stack()
 

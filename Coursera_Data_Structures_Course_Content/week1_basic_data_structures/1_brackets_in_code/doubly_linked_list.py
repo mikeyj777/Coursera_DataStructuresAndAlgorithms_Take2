@@ -106,10 +106,6 @@ class Hash_Table_Doubly_Linked:
 
         return self.head == None 
 
-
-        
-        
-    
     def add_after(self, node, key):
         node2 = Node()
         node2.key = key
