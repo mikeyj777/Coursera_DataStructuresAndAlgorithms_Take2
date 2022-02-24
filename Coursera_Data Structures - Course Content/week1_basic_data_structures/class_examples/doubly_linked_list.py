@@ -22,7 +22,7 @@ class Hash_Table_Doubly_Linked:
             self.tail = self.head
     
     def top_front(self):
-        return self.head
+        return self.head.key
     
     def pop_front(self):
 
@@ -57,7 +57,7 @@ class Hash_Table_Doubly_Linked:
         if self.head == None:
             print("Error:  Can't Pop from Empty list")
         
-        return self.tail
+        return self.tail.key
 
 
     def pop_back(self):
