@@ -1,5 +1,5 @@
 import numpy as np
-import Coursera_Data_Structures_Course_Content.week1_basic_data_structures.class_examples.doubly_linked_list as LL
+import week1_basic_data_structures.class_examples.doubly_linked_list as LL
 
 class Stack(LL.Hash_Table_Doubly_Linked):
 
