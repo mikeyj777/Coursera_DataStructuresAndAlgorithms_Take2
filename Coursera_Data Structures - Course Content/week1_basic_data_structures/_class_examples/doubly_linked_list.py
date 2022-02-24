@@ -17,9 +17,12 @@ class Hash_Table_Doubly_Linked:
         node.key = key
         node.next = copy.deepcopy(self.head)
         self.head = copy.deepcopy(node)
-
+        
         if self.tail == None:
             self.tail = self.head
+    
+    def top_front(self):
+        return self.head
     
     def pop_front(self):
 
@@ -45,7 +48,22 @@ class Hash_Table_Doubly_Linked:
             
             self.tail = copy.deepcopy(new_node)
     
+    def top_back(self):
+
+        #return back item
+        if self.tail == None:
+            self.tail = self.head
+        
+        if self.head == None:
+            print("Error:  Can't Pop from Empty list")
+        
+        return self.tail
+
+
     def pop_back(self):
+
+        #remove back item
+
         if self.head == None:
             print("Error - Can't pop from empty list")
         
@@ -56,6 +74,41 @@ class Hash_Table_Doubly_Linked:
                 p = self.tail.prev
                 self.tail = p
                 self.tail.next = None
+        
+    def find(self, key):
+
+        p = self.head
+
+        while p.key != key:
+            p = p.next
+
+        return p.key == key
+
+    def erase(self,key):
+        
+        if self.head.key == key:
+            self.pop_front()
+        elif self.tail.key == key:
+            self.pop_back()
+        else:
+            p = self.head
+
+            while p.key != key:
+                p = p.next
+
+            if p.key == key:
+                p.prev.next = p.next
+                p.next.prev = p.prev
+            else:
+                print('Error.  Key not found.')
+
+    def empty(self):
+
+        return self.head == None 
+
+
+        
+        
     
     def add_after(self, node, key):
         node2 = Node()
