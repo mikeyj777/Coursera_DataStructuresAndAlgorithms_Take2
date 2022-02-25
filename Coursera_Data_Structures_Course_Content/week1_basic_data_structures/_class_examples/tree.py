@@ -50,18 +50,27 @@ class Binary_Tree(Tree):
         
         return 1 + self.left.size() + self.right.size()
 
+    def in_order_traversal(self):
+        # if self.key != None:
+        if self.left != None:
+            self.left.in_order_traversal()
+        print(self.key)
+        if self.right != None:
+            self.right.in_order_traversal()
+
 
 b_tree = Binary_Tree()
 
-b_tree.set_root()
-b_tree.add_left('a')
-b_tree.add_right('b')
-b_tree.left.add_left('aa')
-b_tree.right.add_left('ba')
-b_tree.right.add_right('bb')
+b_tree.key = 'Les'
+b_tree.add_left('Cathy')
+b_tree.left.add_left('Alex')
+b_tree.left.add_right('Frank')
+b_tree.add_right('Sam')
+b_tree.right.add_left('Nancy')
+b_tree.right.add_right('Violet')
+b_tree.right.right.add_left('Tony')
+b_tree.right.right.add_right('Wendy')
 
-b_tree.right.right.add_left('bba')
-
-print(b_tree.size())
+b_tree.in_order_traversal()
 
 a = 1
