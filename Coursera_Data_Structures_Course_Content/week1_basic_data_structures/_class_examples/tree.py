@@ -13,6 +13,9 @@ class Binary_Tree(Tree):
     left = None
     right = None
 
+    def set_root(self):
+        self.key = 'root'
+
     def add_left(self, key):
         self.left = Binary_Tree()
         self.left.key = key
@@ -34,17 +37,31 @@ class Binary_Tree(Tree):
 
         return 1 + max(self.left.height(), self.right.height())
 
+    def size(self):
+        if self.left == None:
+            if self.right == None:
+                return 1
+            return 1 + self.right.size()
 
-# b_tree = Binary_Tree()
+        if self.right == None:
+            if self.left == None:
+                return 1
+            return 1 + self.left.size()
+        
+        return 1 + self.left.size() + self.right.size()
 
-# b_tree.add_left('a')
-# b_tree.add_right('b')
-# b_tree.left.add_left('aa')
-# b_tree.right.add_left('ba')
-# b_tree.right.add_right('ba')
 
-# b_tree.right.right.add_left('baa')
+b_tree = Binary_Tree()
 
-# print(b_tree.height())
+b_tree.set_root()
+b_tree.add_left('a')
+b_tree.add_right('b')
+b_tree.left.add_left('aa')
+b_tree.right.add_left('ba')
+b_tree.right.add_right('bb')
 
-# a = 1
+b_tree.right.right.add_left('bba')
+
+print(b_tree.size())
+
+a = 1
