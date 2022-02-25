@@ -35,16 +35,16 @@ class Binary_Tree(Tree):
         return 1 + max(self.left.height(), self.right.height())
 
 
-b_tree = Binary_Tree()
+# b_tree = Binary_Tree()
 
-b_tree.add_left('a')
-b_tree.add_right('b')
-b_tree.left.add_left('aa')
-b_tree.right.add_left('ba')
-b_tree.right.add_right('ba')
+# b_tree.add_left('a')
+# b_tree.add_right('b')
+# b_tree.left.add_left('aa')
+# b_tree.right.add_left('ba')
+# b_tree.right.add_right('ba')
 
-b_tree.right.right.add_left('baa')
+# b_tree.right.right.add_left('baa')
 
-print(b_tree.height())
+# print(b_tree.height())
 
-a = 1
+# a = 1
