@@ -21,7 +21,9 @@ class Hash_Table_Doubly_Linked:
         if self.tail == None:
             self.tail = self.head
     
-    def top_front(self):
+    def top_front(self, get_node = False):
+        if get_node:
+            return self.head
         return self.head.key
     
     def pop_front(self):
@@ -42,6 +44,9 @@ class Hash_Table_Doubly_Linked:
 
         else:
             
+            if self.head == None:
+                self.head = new_node
+
             self.tail.next = new_node
             new_node.prev = self.tail
             # temp_tail = copy.deepcopy(self.tail)

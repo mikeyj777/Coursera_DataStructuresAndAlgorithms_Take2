@@ -1,4 +1,6 @@
 import numpy as np
+import copy
+from myqueue import Queue
 
 class Tree:
 
@@ -7,6 +9,12 @@ class Tree:
     def height(self):
         pass
 
+class Queue_Tree(Queue):
+
+    def dequeue(self):
+        a = self.top_front()
+        self.pop_front()
+        return a.key
 
 class Binary_Tree(Tree):
 
@@ -51,12 +59,41 @@ class Binary_Tree(Tree):
         return 1 + self.left.size() + self.right.size()
 
     def in_order_traversal(self):
-        # if self.key != None:
+        
         if self.left != None:
             self.left.in_order_traversal()
         print(self.key)
         if self.right != None:
             self.right.in_order_traversal()
+    
+    def pre_order_traversal(self):
+        if self.key != None:
+            print(self.key)
+        if self.left != None:
+            self.left.pre_order_traversal()
+        if self.right != None:
+            self.right.pre_order_traversal()
+
+    def post_order_traversal(self):
+        if self.left != None:
+            self.left.post_order_traversal()
+        if self.right != None:
+            self.right.post_order_traversal()
+        if self.key != None:
+            print(self.key)
+
+    def level_traversal(self):
+        if self.left != None or self.right != None:
+            q = Queue_Tree()
+            q.enqueue(self)
+            while not q.empty():
+                node = q.dequeue()
+                print(node.key)
+                if node.left != None:
+                    q.enqueue(node.left.key)
+                if node.right != None:
+                    q.enqueue(node.right.key)
+
 
 
 b_tree = Binary_Tree()
@@ -71,6 +108,6 @@ b_tree.right.add_right('Violet')
 b_tree.right.right.add_left('Tony')
 b_tree.right.right.add_right('Wendy')
 
-b_tree.in_order_traversal()
+b_tree.level_traversal()
 
 a = 1
