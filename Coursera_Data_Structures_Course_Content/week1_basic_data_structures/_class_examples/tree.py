@@ -9,12 +9,6 @@ class Tree:
     def height(self):
         pass
 
-class Queue_Tree(Queue):
-
-    def dequeue(self):
-        a = self.top_front()
-        self.pop_front()
-        return a.key
 
 class Binary_Tree(Tree):
 
@@ -84,15 +78,15 @@ class Binary_Tree(Tree):
 
     def level_traversal(self):
         if self.left != None or self.right != None:
-            q = Queue_Tree()
+            q = Queue()
             q.enqueue(self)
             while not q.empty():
                 node = q.dequeue()
                 print(node.key)
                 if node.left != None:
-                    q.enqueue(node.left.key)
+                    q.enqueue(node.left)
                 if node.right != None:
-                    q.enqueue(node.right.key)
+                    q.enqueue(node.right)
 
 
 

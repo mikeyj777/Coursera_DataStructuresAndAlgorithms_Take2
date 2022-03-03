@@ -7,7 +7,7 @@ class Queue(LL.Hash_Table_Doubly_Linked):
         self.push_back(key)
     
     def dequeue(self):
-        a = self.top_front(get_node=True)
+        a = self.top_front()
         self.pop_front()
         return a
 
