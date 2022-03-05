@@ -94,13 +94,13 @@ b_tree = Binary_Tree()
 
 b_tree.key = 'Les'
 b_tree.add_left('Cathy')
-b_tree.left.add_left('Alex')
+# b_tree.left.add_left('Alex')
 b_tree.left.add_right('Frank')
-b_tree.add_right('Sam')
-b_tree.right.add_left('Nancy')
-b_tree.right.add_right('Violet')
-b_tree.right.right.add_left('Tony')
-b_tree.right.right.add_right('Wendy')
+# b_tree.add_right('Sam')
+# b_tree.right.add_left('Nancy')
+# b_tree.right.add_right('Violet')
+# b_tree.right.right.add_left('Tony')
+# b_tree.right.right.add_right('Wendy')
 
 b_tree.level_traversal()
 

@@ -1,4 +1,3 @@
-import numpy as np
 import doubly_linked_list as LL
 
 class Stack(LL.Hash_Table_Doubly_Linked):
