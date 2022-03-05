@@ -1,7 +1,9 @@
 # python3
 
-import numpy as np
 import copy
+
+openings = ['(', '[', '{']
+closings = [')', ']', '}']
 
 class Node:
 
@@ -36,7 +38,7 @@ class Hash_Table_Doubly_Linked:
     def push_back(self, key):
 
         new_node = Node()
-
+            
         new_node.key = key
         
         if self.tail == None:
@@ -108,7 +110,6 @@ class Hash_Table_Doubly_Linked:
 
         return self.head == None 
 
-
     def add_after(self, node, key):
         node2 = Node()
         node2.key = key
@@ -147,36 +148,57 @@ class Stack(Hash_Table_Doubly_Linked):
 
 
     def isBalanced(self, l):
-        
-        tot_parens = 0
+
         self.head = None
 
         for char in l:
             if char in ['(', '[']:
                 self.push(char)
-                tot_parens += 1
             else:
                 if self.empty():
-                    return tot_parens
+                    return False
                 if char in [')', ']']:
                     top = self.pop()
-                    tot_parens -= 1
-                    
+                    if (top == '[' and char != ']') or \
+                        (top == '(' and char != ')'):
+                        return False
         
-        return tot_parens
+        return self.empty()
+    
+    def find_mismatch(self, l):
 
-instr = '(4 + [ 15* ( a chipmunk / ( 2**3 ) / 45 ) + 20] * 8)]]'
+        self.head = None
+        posn = 0
 
-stack = Stack()
+        for char in l:
+            posn += 1
+            if char in openings:
+                self.push([char, posn])
+            else:
+                # if self.empty():
+                #     return posn
+                if char in closings:
+                    top = self.pop()[0]
+                    if (top == '[' and char != ']') or \
+                        (top == '(' and char != ')') or \
+                        (top == '{' and char != '}') :
+                        return posn
+        
+        if self.head == None:
+            return 0
+        
+        return self.head.key[1]
+
 
 def main():
-    # text = input()
-    mismatch = stack.isBalanced(instr)
+    text = input()
+    stack = Stack()
+    mismatch = stack.find_mismatch(text)
     # Printing answer, write your code here
     if mismatch == 0:
-        print('Success')
-    else:
-        print(mismatch)
+        mismatch = 'Success'
+
+    print(mismatch)
 
 if __name__ == "__main__":
     main()
