@@ -190,10 +190,8 @@ class Stack(Hash_Table_Doubly_Linked):
         return self.head.key[1]
 
 
-text = 'foo(bar[i);'
-
 def main():
-    # text = input()
+    text = input()
     stack = Stack()
     mismatch = stack.find_mismatch(text)
     # Printing answer, write your code here
