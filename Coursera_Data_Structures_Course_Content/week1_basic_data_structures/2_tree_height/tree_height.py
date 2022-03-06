@@ -27,13 +27,27 @@ def compute_height(n, parents):
             nodes[i].parent = nodes[parents[i]]
     
     max_height = 0
+    # top down:
+
+    # for i in range(n):
+    #     height = 1
+    #     p = nodes[i]
+    #     while p.child != None:
+    #         height += 1
+    #         p = p.child
+    #     max_height = max(height, max_height)
+
+    #btm up:
+
+    max_height = 0
     for i in range(n):
         height = 1
         p = nodes[i]
-        while p.child != None:
+        while not p.isRoot:
+            p = p.parent
             height += 1
-            p = p.child
-        max_height = max(height, max_height)
+        max_height = max(max_height, height)
+
             
 
 
@@ -41,10 +55,10 @@ def compute_height(n, parents):
 
 
 def main():
-    n = int(input())
-    parents = list(map(int, input().split()))
+    # n = int(input())
+    # parents = list(map(int, input().split()))
 
-    # parents = [4, -1, 4, 1, 1]
+    parents = [9, 7, 5, 5, 2, 9, 9, 9, 2, -1]
 
     print(compute_height(len(parents), parents))
 
