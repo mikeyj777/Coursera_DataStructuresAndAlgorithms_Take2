@@ -3,24 +3,50 @@
 import sys
 import threading
 
+class Node:
+    child = None
+    parent = None
+    isRoot = False
+    index = None
+
+
 
 def compute_height(n, parents):
     # Replace this code with a faster implementation
+    nodes = []
+    for i in range(n):
+        node = Node()
+        node.index = i
+        if parents[i] == -1:
+            node.isRoot = True
+        nodes.append(node)
+
+    for i in range(n):
+        if parents[i] != -1:
+            nodes[parents[i]].child = nodes[i]
+            nodes[i].parent = nodes[parents[i]]
+    
     max_height = 0
-    for vertex in range(n):
-        height = 0
-        current = vertex
-        while current != -1:
+    for i in range(n):
+        height = 1
+        p = nodes[i]
+        while p.child != None:
             height += 1
-            current = parents[current]
-        max_height = max(max_height, height)
+            p = p.child
+        max_height = max(height, max_height)
+            
+
+
     return max_height
 
 
 def main():
     n = int(input())
     parents = list(map(int, input().split()))
-    print(compute_height(n, parents))
+
+    # parents = [4, -1, 4, 1, 1]
+
+    print(compute_height(len(parents), parents))
 
 
 # In Python, the default limit on recursion depth is rather low,

@@ -19,8 +19,8 @@ class Hash_Table_Doubly_Linked:
     def push_front(self, key):
         node = Node()
         node.key = key
-        node.next = copy.deepcopy(self.head)
-        self.head = copy.deepcopy(node)
+        node.next = self.head
+        self.head = node
         
         if self.tail == None:
             self.tail = self.head
@@ -33,7 +33,7 @@ class Hash_Table_Doubly_Linked:
         if self.head == None:
             print("Error - Can't pop from empty list")
         else:
-            self.head = copy.deepcopy(self.head.next)
+            self.head = self.head.next
     
     def push_back(self, key):
 
@@ -50,7 +50,7 @@ class Hash_Table_Doubly_Linked:
             new_node.prev = self.tail
             # temp_tail = copy.deepcopy(self.tail)
             
-            self.tail = copy.deepcopy(new_node)
+            self.tail = new_node
     
     def top_back(self):
 
@@ -178,10 +178,13 @@ class Stack(Hash_Table_Doubly_Linked):
                 # if self.empty():
                 #     return posn
                 if char in closings:
-                    top = self.pop()[0]
-                    if (top == '[' and char != ']') or \
-                        (top == '(' and char != ')') or \
-                        (top == '{' and char != '}') :
+                    if self.head != None:
+                        top = self.pop()[0]
+                        if (top == '[' and char != ']') or \
+                            (top == '(' and char != ')') or \
+                            (top == '{' and char != '}') :
+                            return posn
+                    else:
                         return posn
         
         if self.head == None:
