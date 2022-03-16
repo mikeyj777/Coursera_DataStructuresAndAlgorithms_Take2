@@ -1,4 +1,6 @@
 # python3
+import queue
+from datetime import datetime as dt
 
 from collections import namedtuple
 
@@ -7,13 +9,39 @@ Response = namedtuple("Response", ["was_dropped", "started_at"])
 
 
 class Buffer:
-    def __init__(self, size):
-        self.size = size
-        self.finish_time = []
+    def __init__(self, buffer_size, responses):
+        self.buffer_size = buffer_size
+        self.buff_dict = {}
+        self.start_time = dt.now()
+        self.storage = 0 
+        self.responses = responses    
+        self.last_time = -1
+
+    def curr_time(self):
+        return dt.now() - self.start_time
 
     def process(self, request):
-        # write your code here
-        return Response(False, -1)
+        
+        for fin_time, req in self.buff_dict.items():
+            if fin_time >= self.curr_time():
+                self.buff_dict.pop(fin_time)
+        
+        was_dropped = True
+        start_time = -1
+        if request.arrived_at > self.curr_time() and \
+            self.storage <= self.buffer_size and \
+            request.arrived_at != self.last_time:
+
+            fin_time = request.arrived_at + request.time_to_process
+            if fin_time not in self.buff_dict.keys():
+                self.buff_dict[fin_time] = request
+                self.storage += 1
+                was_dropped = False
+                start_time = request.arrived_at
+            
+        self.last_time = request.arrived_at
+
+        return Response(was_dropped, start_time)
 
 
 def process_requests(requests, buffer):
@@ -30,7 +58,7 @@ def main():
         arrived_at, time_to_process = map(int, input().split())
         requests.append(Request(arrived_at, time_to_process))
 
-    buffer = Buffer(buffer_size)
+    buffer = Buffer(buffer_size, responses)
     responses = process_requests(requests, buffer)
 
     for response in responses:

@@ -55,10 +55,10 @@ def compute_height(n, parents):
 
 
 def main():
-    # n = int(input())
-    # parents = list(map(int, input().split()))
+    n = int(input())
+    parents = list(map(int, input().split()))
 
-    parents = [9, 7, 5, 5, 2, 9, 9, 9, 2, -1]
+    # parents = [9, 7, 5, 5, 2, 9, 9, 9, 2, -1]
 
     print(compute_height(len(parents), parents))
 
