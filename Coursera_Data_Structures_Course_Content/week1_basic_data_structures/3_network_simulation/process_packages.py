@@ -9,26 +9,30 @@ Response = namedtuple("Response", ["was_dropped", "started_at"])
 
 
 class Buffer:
-    def __init__(self, buffer_size, responses):
+    def __init__(self, buffer_size):
         self.buffer_size = buffer_size
         self.buff_dict = {}
         self.start_time = dt.now()
-        self.storage = 0 
-        self.responses = responses    
+        self.storage = 0   
         self.last_time = -1
 
     def curr_time(self):
-        return dt.now() - self.start_time
+        ct = dt.now() - self.start_time
+        return ct.microseconds / 1000
 
     def process(self, request):
         
+        popme = {}
         for fin_time, req in self.buff_dict.items():
             if fin_time >= self.curr_time():
-                self.buff_dict.pop(fin_time)
+               popme[fin_time] = None
+
+        for fin_time in popme.keys():
+            self.buff_dict.pop(fin_time)            
         
         was_dropped = True
         start_time = -1
-        if request.arrived_at > self.curr_time() and \
+        if request.arrived_at <= self.curr_time() and \
             self.storage <= self.buffer_size and \
             request.arrived_at != self.last_time:
 
@@ -52,13 +56,17 @@ def process_requests(requests, buffer):
 
 
 def main():
-    buffer_size, n_requests = map(int, input().split())
+    # buffer_size, n_requests = map(int, input().split())
+    indata = [[0,1], [1,1]]
+    buffer_size = 1
+    n_requests = len(indata)
     requests = []
-    for _ in range(n_requests):
+    for i in range(n_requests):
         arrived_at, time_to_process = map(int, input().split())
+        # arrived_at, time_to_process = indata[i]
         requests.append(Request(arrived_at, time_to_process))
 
-    buffer = Buffer(buffer_size, responses)
+    buffer = Buffer(buffer_size)
     responses = process_requests(requests, buffer)
 
     for response in responses:
