@@ -13,7 +13,7 @@ class StackWithMax(deque):
 
     def Push(self, a):
         self.append(a)
-        if a > self.max_val:
+        if a >= self.max_val:
             self.max_val = a
             self.max_stack.append(a)
 
@@ -38,22 +38,54 @@ class StackWithMax(deque):
 if __name__ == '__main__':
     stack = StackWithMax()
 
-    # queries = [
+    queries = [
 
-    #     ['push', '7'],
-    #     ['push', '1'],
-    #     ['push', '7'],
-    #     ['max'],
-    #     ['pop'], 
-    #     ['max']
+        ['push', 0],
+        ['max'],
+        ['push', 1],
+        ['max'],
+        ['push', 1],
+        ['max'],
+        ['push', 1],
+        ['max'],
+        ['push', 0],
+        ['max'],
+        ['push', 0],
+        ['max'],
+        ['push', 0],
+        ['max'],
+        ['push', 0],
+        ['max'],
+        ['push', 0],
+        ['max'],
+        ['push', 0],
+        ['max'],
+        ['pop'],
+        ['max'],
+        ['pop'],
+        ['max'],
+        ['pop'],
+        ['max'],
+        ['pop'],
+        ['max'],
+        ['pop'],
+        ['max'],
+        ['pop'],
+        ['max'],
+        ['pop'],
+        ['max'],
+        ['pop'],
+        ['max'],
+        ['pop'],
+        ['max'],
 
-    #     ]
+    ]
 
-    # for query in queries:
+    for query in queries:
 
-    num_queries = int(sys.stdin.readline())
-    for _ in range(num_queries):
-        query = sys.stdin.readline().split()
+    # num_queries = int(sys.stdin.readline())
+    # for _ in range(num_queries):
+    #     query = sys.stdin.readline().split()
 
         if query[0] == "push":
             stack.Push(int(query[1]))
