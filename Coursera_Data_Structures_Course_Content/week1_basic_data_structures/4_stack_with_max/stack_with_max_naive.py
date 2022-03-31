@@ -38,54 +38,13 @@ class StackWithMax(deque):
 if __name__ == '__main__':
     stack = StackWithMax()
 
-    queries = [
 
-        ['push', 0],
-        ['max'],
-        ['push', 1],
-        ['max'],
-        ['push', 1],
-        ['max'],
-        ['push', 1],
-        ['max'],
-        ['push', 0],
-        ['max'],
-        ['push', 0],
-        ['max'],
-        ['push', 0],
-        ['max'],
-        ['push', 0],
-        ['max'],
-        ['push', 0],
-        ['max'],
-        ['push', 0],
-        ['max'],
-        ['pop'],
-        ['max'],
-        ['pop'],
-        ['max'],
-        ['pop'],
-        ['max'],
-        ['pop'],
-        ['max'],
-        ['pop'],
-        ['max'],
-        ['pop'],
-        ['max'],
-        ['pop'],
-        ['max'],
-        ['pop'],
-        ['max'],
-        ['pop'],
-        ['max'],
 
-    ]
+    # for query in queries:
 
-    for query in queries:
-
-    # num_queries = int(sys.stdin.readline())
-    # for _ in range(num_queries):
-    #     query = sys.stdin.readline().split()
+    num_queries = int(sys.stdin.readline())
+    for _ in range(num_queries):
+        query = sys.stdin.readline().split()
 
         if query[0] == "push":
             stack.Push(int(query[1]))
