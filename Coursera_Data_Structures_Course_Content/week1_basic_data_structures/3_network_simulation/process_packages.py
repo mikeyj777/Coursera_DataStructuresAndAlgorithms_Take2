@@ -57,13 +57,13 @@ def process_requests(requests, buffer):
 
 def main():
     # buffer_size, n_requests = map(int, input().split())
-    indata = [[0,1], [1,1]]
+    indata = [[1,0]]
     buffer_size = 1
     n_requests = len(indata)
     requests = []
     for i in range(n_requests):
-        arrived_at, time_to_process = map(int, input().split())
-        # arrived_at, time_to_process = indata[i]
+        # arrived_at, time_to_process = map(int, input().split())
+        arrived_at, time_to_process = indata[i]
         requests.append(Request(arrived_at, time_to_process))
 
     buffer = Buffer(buffer_size)
