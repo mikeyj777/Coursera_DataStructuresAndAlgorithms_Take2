@@ -30,6 +30,7 @@ class Bin_Tree_Complete:
         while i > 1 and self.h[parent] < self.h[i]:
             self.swap(parent, i)    
             i = parent
+            parent = self.get_parent(i)
 
     def swap(self, first, second):
         self.h[first], self.h[second] = self.h[second], self.h[first]
@@ -90,6 +91,6 @@ class Heap_for_Sorting(Bin_Tree_Complete):
     def output(self):
         print(self.A)
 
-dat_heap = Heap_for_Sorting([8,4,5,10])
+dat_heap = Heap_for_Sorting([8,4,5,10,1,-2])
 dat_heap.heap_sort()
 dat_heap.output()
