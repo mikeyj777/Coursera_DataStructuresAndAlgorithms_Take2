@@ -83,22 +83,22 @@ class Heap_for_Sorting(Bin_Tree_Complete):
 
 
     def build_heap(self):
-        self.h = self.A.copy()
-        self.h.insert(0, None)
         self.size = len(self.A)
-
-        for i in range((self.size - 1) // 2, -1, -1):
+        self.h = self.A
+        self.h.insert(0, None)
+        for i in range((self.size - 1) // 2, 0, -1):
             self.sift_down(i)
 
 
     def heap_sort(self):
         self.build_heap()
         for i in range(self.max_size-1, 0, -1):
-            self.A[0], self.A[i] = self.A[i], self.A[1]
+            self.h[1], self.h[self.size] = self.h[self.size], self.h[1]
+            self.size -= 1
             self.sift_down(1)
     
     def output(self):
-        print(self.A)
+        print(self.A[1:])
 
 dat_heap = Heap_for_Sorting([8,4,5,10,1,-2])
 dat_heap.heap_sort()
