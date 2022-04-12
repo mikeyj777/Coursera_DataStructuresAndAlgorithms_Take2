@@ -82,11 +82,18 @@ class Heap_for_Sorting(Bin_Tree_Complete):
         super().__init__(max_size = max_size, size = 0)
 
 
+    def build_heap(self):
+        self.h = self.A
+        self.size = len(self.h)
+        for i in range((self.size - 1) // 2, -1, -1):
+            self.sift_down(i)
+
+
     def heap_sort(self):
-        for i in range(self.max_size):
-            self.insert(self.A[i])
+        self.build_heap()
         for i in range(self.max_size-1, -1, -1):
-            self.A[i] = self.extract_max()
+            self.A[1], self.A[i] = self.A[i], self.A[1]
+            self.sift_down(1)
     
     def output(self):
         print(self.A)
