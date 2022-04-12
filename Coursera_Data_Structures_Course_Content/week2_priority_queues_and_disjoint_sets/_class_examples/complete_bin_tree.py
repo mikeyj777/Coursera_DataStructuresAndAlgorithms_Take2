@@ -14,6 +14,7 @@ class Bin_Tree_Complete:
     def __init__(self, max_size, size):
         self.max_size = max_size
         self.size = size
+        self.h = np.empty(self.max_size+1)
 
     def get_parent(self, i):
         return i//2
@@ -76,19 +77,19 @@ class Heap_for_Sorting(Bin_Tree_Complete):
 
     def __init__(self, A):
         self.A = A
-        size = len(A)
-        super().__init__(max_size = size, size = size)
+        max_size = len(A)
+        super().__init__(max_size = max_size, size = 0)
 
 
     def heap_sort(self):
-        for i in range(1,self.size + 1):
+        for i in range(self.max_size):
             self.insert(self.A[i])
-        for i in range(self.size, 0, -1):
+        for i in range(self.max_size-1, -1, -1):
             self.A[i] = self.extract_max()
     
     def output(self):
         print(self.A)
 
-dat_heap = Heap_for_Sorting([5,4,3])
+dat_heap = Heap_for_Sorting([8,4,5,10])
 dat_heap.heap_sort()
-dat_heap.print()
+dat_heap.output()
