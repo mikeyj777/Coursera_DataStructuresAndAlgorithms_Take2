@@ -97,6 +97,11 @@ class Heap_for_Sorting(Bin_Tree_Complete):
             self.size -= 1
             self.sift_down(1)
     
+    def partial_sort(self, k):
+        self.build_heap()
+        for i in range(1, k+1):
+            self.extract_max()
+    
     def output(self):
         print(self.A[1:])
 
