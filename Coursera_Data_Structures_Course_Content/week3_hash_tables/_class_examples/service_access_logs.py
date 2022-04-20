@@ -7,17 +7,28 @@ class Log:
         self.time = time
         self.IP = IP
 
-def main_loop(log = '', i = 0, j = 0, C = {}):
-    a = update_access_list(log, i, j, C)
-
-def update_access_list(log, i, j, C):
-
-    while log[i].time <= dt.now():
-        C[log[i].IP] += 1
-        i += 1
-
-    while log[i].time <= dt.now() - 3600:
-        C[log[j].IP] -= 1
-        j += 1
+class service_access:
     
-    return None
+    log = Log()
+
+    def __init__(self):
+        pass
+
+    def main_loop(self, i = 0, j = 0, C = {}):
+        a = self.update_access_list(i, j, C)
+
+    def update_access_list(self, i, j, C):
+
+        now = dt.now() #convert to seconds
+
+        while self.log[i].time <= now:
+            C[self.log[i].IP] += 1
+            i += 1
+
+        while self.log[i].time <= now - 3600:
+            C[self.log[j].IP] -= 1
+            j += 1
+ 
+
+    def accessed_last_hour(self, IP):
+        return self.C[IP] > 0
