@@ -46,6 +46,11 @@ class Disjoint_Set:
         return self.find(a) == self.find(b)
     
     def get_height(self, i):
+        height = 0
+        while i != self.parent[i]:
+            height += 1
+            i = self.parent[i]
+        return height
         
 
 dj = Disjoint_Set()
@@ -79,9 +84,11 @@ for i in range(1,13):
 for i in range(1,61):
   dj.find(i)
 
-max_rank = 0
-for r in dj.rank:
-    if r > max_rank:
-        max_rank = r
+max_height = 0
+for k in dj.parent.keys():
+    h = dj.get_height(k)
+    if h > max_height:
+        max_height = h
+        print(max_height)
 
 a = 1

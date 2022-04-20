@@ -2,6 +2,7 @@
 class Disjoint_Set:
 
     smallest = {}
+    sets = {}
 
     def __init__(self):
         pass
